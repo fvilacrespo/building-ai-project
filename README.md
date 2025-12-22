@@ -18,7 +18,7 @@ This project solves this by replacing intuition with data-driven probability.
 ## How is it used?
 The solution is designed for football fans who want to curate their weekend viewing schedule.
 1.  **Input:** The user (or the system) inputs the upcoming match fixtures for the week.
-2.  **Processing:** The AI analyzes the recent form of both teams (goals scored/conceded, big chances created/conceded, defensive rigidity, style of play, etc.) from historical data, among many other extra factors or parameters
+2.  **Processing:** The AI analyzes the recent form of both teams (goals scored/conceded, big chances created/conceded, defensive rigidity, style of play, etc.) from historical data, among many other extra factors or parameters.
 3.  **Output:** The system assigns an "Excitement Score" or classifies the match into tiers (e.g., "Must Watch", "Solid Choice", "Likely Boring").
 
 
@@ -34,10 +34,10 @@ The model aims to integrate multiple layers of data:
 * **Player Quality:** Individual player ratings and availability (injuries to key stars).
 
 **AI Techniques:**
-The comprehensive solution envisions a **Multi-modal Machine Learning Model** that weighs these diverse inputs using a combination of techniques:
+The comprehensive solution envisions a multi-modal machine learning model that weighs these diverse inputs using a combination of techniques:
 
-* **Weighted Analysis (Regression):** To calculate a specific "Excitement Score", we consider methods like **Linear Regression** for interpreting clear variable weights, and **Neural Networks** to capture complex, non-linear patterns in match momentum.
-* **Classification:** To categorize matches into specific tiers (Tier 1: Thriller, Tier 2: Watchable, Tier 3: Slow), we explore algorithms such as **K-Nearest Neighbors (KNN)** to find similar historical matches.
+* **Weighted Analysis (Regression):** To calculate a specific "Excitement Score", we consider methods like linear regression for interpreting clear variable weights, and neural networks to capture complex, non-linear patterns in match momentum.
+* **Classification:** To categorize matches into specific tiers (Tier 1: Thriller, Tier 2: Watchable, Tier 3: Slow), we explore algorithms such as k-nearest neighbors to find similar historical matches.
 
 
 ## Demo/Example/Experiment
@@ -60,13 +60,12 @@ While the model improves decision-making, it cannot predict the unpredictable na
 
 
 ## What next?
-To transform this vision into a fully functional product, the next steps focus on **implementation** and **automation**:
+To transform this vision into a fully functional product, the next steps focus on implementation and automation:
 
-* **From Static to Real-Time:** The biggest leap involves moving from analyzing historical CSV files to building **live data pipelines**. This means automating the collection of complex variables (weather, real-time momentum, lineups) via APIs so the "Fun Index" is generated instantly before kickoff.
+* **From Static to Real-Time:** The biggest leap involves moving from analyzing historical CSV files to building live data pipelines. This means automating the collection of complex variables (weather, real-time momentum, lineups) via APIs so the "Excitement Score" is generated instantly before kickoff.
 * **User Feedback Loop:** The project could grow by allowing users to vote on whether they enjoyed a recommended match. This data would feed back into the model to refine its accuracy.
-* **Personalization:** Allowing users to manually customize the algorithm by **adjusting the weights** of parameters (e.g., valuing "high scoring" more than "tactical intensity") and selecting **favorite teams or players** to boost their specific matches in the final ranking.
-* **Skills & Assistance Needed:** Implementing **advanced Web Scraping** and **Cloud Deployment** pipelines is essential. Additionally, **domain expertise** in football analytics is crucial to correctly perform feature selection and assign the right weight to the variables that truly matter.
-
+* **Personalization:** Allowing users to manually customize the algorithm by adjusting the weights of parameters (e.g., valuing "high scoring" more than "tactical intensity") and selecting favorite teams or players to boost their specific matches in the final ranking.
+* **Skills & Assistance Needed:** Domain expertise in football analytics is crucial to correctly perform feature selection and assign the right weight to the variables that truly matter. Additionally, implementing advanced Web Scraping and Cloud Deployment pipelines is essential.
 
 ## Acknowledgments
 * Historical match data provided freely by [Football-Data.co.uk](https://www.football-data.co.uk/).
