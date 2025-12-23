@@ -1,4 +1,4 @@
-# MatchPick
+# XciteFootball
 Final project for the Building AI course
 
 
@@ -19,7 +19,7 @@ This project solves this by replacing intuition with data-driven probability.
 The solution is designed for football fans who want to curate their weekend viewing schedule.
 1.  **Input:** The user (or the system) inputs the upcoming match fixtures for the week.
 2.  **Processing:** The AI analyzes the recent form of both teams (goals scored/conceded, big chances created/conceded, defensive rigidity, style of play, etc.) from historical data, among many other extra factors or parameters.
-3.  **Output:** The system assigns an "Excitement Score" or classifies the match into tiers (e.g., "Must Watch", "Solid Choice", "Likely Boring").
+3.  **Output:** The system assigns an "Excitement Score" or classifies the match into tiers (e.g., "Must Watch", "Watchable", "Likely Boring").
 
 
 ## Data sources and AI methods
@@ -36,8 +36,8 @@ The model aims to integrate multiple layers of data:
 **AI Techniques:**
 The comprehensive solution envisions a multi-modal machine learning model that weighs these diverse inputs using a combination of techniques:
 
-* **Weighted Analysis (Regression):** To calculate a specific "Excitement Score", we consider methods like linear regression for interpreting clear variable weights, and neural networks to capture complex, non-linear patterns in match momentum.
-* **Classification:** To categorize matches into specific tiers (Tier 1: Thriller, Tier 2: Watchable, Tier 3: Slow), we explore algorithms such as k-nearest neighbors to find similar historical matches.
+* **Weighted Analysis (Regression):** To calculate a specific "Excitement Score", we consider methods like linear or logistic regression for interpreting clear variable weights, and neural networks to capture complex, non-linear patterns in match momentum.
+* **Classification:** To categorize matches into specific tiers (Must Watch, Watchable, Likely Boring), we explore algorithms such as k-nearest neighbors to find similar historical matches.
 
 
 ## Demo/Example/Experiment
@@ -56,7 +56,7 @@ from sklearn.linear_model import LogisticRegression
 from datetime import datetime
 
 # --- 1. DATA LOADING & PREPARATION ---
-DATA = "https://www.football-data.co.uk/mmz4281/2526/E0.csv"  # Find current or any Premier League season CSV in https://www.football-data.co.uk/englandm.php
+DATA = "https://www.football-data.co.uk/mmz4281/2526/SP1.csv"  # Find the current or any LaLiga season stats CSV in https://www.football-data.co.uk/spainm
 try:
     df = pd.read_csv(DATA)
     # Converts 'Date' column to datetime objects (handling day/month/year format)
@@ -71,7 +71,7 @@ except FileNotFoundError:
 
 
 # --- 2. HELPER FUNCTION: HISTORICAL STATS ---
-MIN_GAMES_REQUIRED = 6  # This is used to skip early season matches to ensure goal averages are statistically significant.
+MIN_GAMES_REQUIRED = 5  # This is used to skip early season matches to ensure goal averages are statistically significant.
 
 
 # Calculates the average goals scored/conceded by a team just before a specific match date.
@@ -109,7 +109,6 @@ def get_team_stats_at_date(team, current_match_date, full_df):
 
 
 # --- 3. BUILDING THE TRAINING DATASET ---
-# We iterate through history match by match to build the dataset dynamically.
 
 X_train = []  # Features (Stats)
 y_train = []  # Target (Labels)
@@ -135,7 +134,6 @@ for index, row in df.iterrows():
     y_train.append(label)
 
 # --- 4. MODEL TRAINING ---
-# Using Logistic Regression to predict the probability of a high-scoring game
 model = LogisticRegression()
 model.fit(X_train, y_train)
 
@@ -172,20 +170,19 @@ print(
 print("=" * 80)
 
 # --- UPDATE FIXTURES HERE ---
-# Replace the list below with the actual upcoming matches you want to predict.
-# IMPORTANT: Ensure team names match EXACTLY with the CSV format
-# You can find the correct spelling for all teams of the season 25/26 in the Cheat Sheet at the bottom of the code.
+# Replace the list below with the actual upcoming matches you want to predict. IMPORTANT: Ensure team names match EXACTLY with the ones in the CSV.
+
 fixtures = [
-    ("Man United", "Newcastle"),
-    ("Nott'm Forest", "Man City"),
-    ("West Ham", "Fulham"),
-    ("Liverpool", "Wolves"),
-    ("Burnley", "Everton"),
-    ("Brentford", "Bournemouth"),
-    ("Arsenal", "Brighton"),
-    ("Chelsea", "Aston Villa"),
-    ("Sunderland", "Leeds"),
-    ("Crystal Palace", "Tottenham"),
+    ("Espanol", "Barcelona"),
+    ("Vallecano", "Getafe"),
+    ("Celta", "Valencia"),
+    ("Osasuna", "Ath Bilbao"),
+    ("Elche", "Villarreal"),
+    ("Sevilla", "Levante"),
+    ("Real Madrid", "Betis"),
+    ("Mallorca", "Girona"),
+    ("Alaves", "Oviedo"),
+    ("Sociedad", "Ath Madrid"),
 ]
 
 # List to store valid predictions
@@ -206,13 +203,6 @@ predictions_list.sort(key=lambda x: x["score"], reverse=True)
 # Prints the sorted results
 for p in predictions_list:
     print(f"{p['local']:<20} vs {p['visitor']:<20} | Score: {p['score']:.1f}/10")
-
-# --- CHEAT SHEET: CORRECT TEAM NAMES (SEASON 25/26) ---
-# Use these names exactly when updating the 'fixtures' list:
-# Arsenal, Aston Villa, Bournemouth, Brentford, Brighton, Burnley,
-# Chelsea, Crystal Palace, Everton, Fulham, Leeds, Liverpool,
-# Man City, Man United, Newcastle, Nott'm Forest, Sunderland,
-# Tottenham, West Ham, Wolves
 
 ```
 </details>
